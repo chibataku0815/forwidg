@@ -7,6 +7,7 @@ import {
 	UserButton,
 } from "@clerk/nextjs";
 import "./globals.css";
+import PageHeader from "@/components/page-header";
 /**
  * @fileoverview
  * このファイルは、アプリケーション全体のレイアウトを定義します。
@@ -34,14 +35,9 @@ export default function RootLayout({
 }) {
 	return (
 		<ClerkProvider>
-			<html lang="ja" className={`${notoSansJP.variable} font-sans`}>
+			<html lang="ja">
 				<body>
-					<SignedOut>
-						<SignInButton />
-					</SignedOut>
-					<SignedIn>
-						<UserButton />
-					</SignedIn>
+					<PageHeader />
 					{children}
 				</body>
 			</html>

@@ -1,5 +1,19 @@
 import type { Config } from "tailwindcss"
 
+/**
+ * @fileoverview
+ * Tailwind CSSの設定ファイルです。テーマの拡張やプラグインの設定を行います。
+ *
+ * @spec
+ * - ダークモードをクラスベースで設定します。
+ * - コンテンツのパスを指定します。
+ * - テーマの拡張として、色、ボーダー半径、アニメーション、フォントファミリーを設定します。
+ * - tailwindcss-animateプラグインを使用します。
+ *
+ * @limitations
+ * - プリフィックスは空文字列です。
+ */
+
 const config = {
   darkMode: ["class"],
   content: [
@@ -7,7 +21,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
   theme: {
     container: {
@@ -71,6 +85,9 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      fontFamily: {
+        sans: ['var(--font-noto-sans-jp)'],
       },
     },
   },

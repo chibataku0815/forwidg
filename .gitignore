@@ -34,3 +34,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# supabaseディレクトリ内の機密情報やビルド成果物を無視
+supabase/.env
+supabase/.temp
+supabase/.branches
+
+# drizzleディレクトリ内の機密情報やビルド成果物を無視
+drizzle/*.sql
+drizzle/meta/

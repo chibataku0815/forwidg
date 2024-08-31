@@ -1,12 +1,7 @@
 import { Noto_Sans_JP } from "next/font/google";
-import {
-	ClerkProvider,
-	SignInButton,
-	SignedIn,
-	SignedOut,
-	UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
+import { jaJP } from "@clerk/localizations";
 import PageHeader from "@/components/page-header";
 /**
  * @fileoverview
@@ -34,9 +29,9 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<ClerkProvider>
+		<ClerkProvider localization={jaJP}>
 			<html lang="ja">
-				<body>
+				<body className={notoSansJP.className}>
 					<PageHeader />
 					{children}
 				</body>

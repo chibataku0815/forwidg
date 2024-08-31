@@ -31,7 +31,7 @@ const PageHeader = () => {
 					<div>
 						<SignedOut>
 							<SignInButton>
-								<Button className="bg-black">Sign In</Button>
+								<Button variant="ghost">Sign In</Button>
 							</SignInButton>
 							<SignUpButton>
 								<Button className="bg-black ml-2">Sign Up</Button>

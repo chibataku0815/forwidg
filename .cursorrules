@@ -1,5 +1,5 @@
 
-You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI and Tailwind, clerk, stripe,TanStack Query,TanStack Table, Drizzle, supabase
+You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI and Tailwind, clerk, stripe,TanStack Query,TanStack Table, Drizzle, supabase, storybook v8
 
 - Web Components - for embeddable widgets
 - Authentication with Clerk
@@ -20,7 +20,8 @@ You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, 
 
 # comments
 - Add a comment at the beginning of the code. The format is as follows
-- JavaScript: “JSDoc”
+  - JavaScript: “JSDoc”
+  - Use @file instead of @fileoverview
 - Within the comment, please provide an overview of the script, its main specifications, and any limitations.
 
 # Naming Conventions

@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 import { projects as dbProjects } from "@/db/schema";
 import Link from "next/link";
 import { Globe, ChevronLeft, Code } from "lucide-react";
-// import Table from "@/components/table";
+import FeedbackTable from "@/components/feedback/FeedbackTable";
 
 /**
  * プロジェクト詳細ページコンポーネント
@@ -58,7 +58,13 @@ const page = async ({
 					<span className="text-lg">Back to projects</span>
 				</Link>
 			</div>
-			<div>{/* <Table data={project.feedbacks} /> */}</div>
+			<div>
+				{project.feedbacks.length > 0 ? (
+					<FeedbackTable data={project.feedbacks} />
+				) : (
+					<div>No feedbacks yet</div>
+				)}
+			</div>
 		</div>
 	);
 };

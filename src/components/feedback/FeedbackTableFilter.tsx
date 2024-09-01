@@ -4,6 +4,7 @@ import type { Column } from "@tanstack/react-table";
 import type { InferSelectModel } from "drizzle-orm";
 import type { feedbacks } from "@/db/schema";
 import type { Table as TanstackTable } from "@tanstack/react-table";
+import { Input } from "@/components/ui/input";
 
 /**
  * InferSelectModelについて:
@@ -42,7 +43,7 @@ function FeedbackTableFilter({
 			onKeyUp={(e) => e.stopPropagation()}
 			onKeyDown={(e) => e.stopPropagation()}
 		>
-			<input
+			<Input
 				type="number"
 				value={(columnFilterValue as [number, number])?.[0] ?? ""}
 				onChange={(e) =>
@@ -52,9 +53,9 @@ function FeedbackTableFilter({
 					])
 				}
 				placeholder="Min"
-				className="w-24 border shadow rounded"
+				className="w-24"
 			/>
-			<input
+			<Input
 				type="number"
 				value={(columnFilterValue as [number, number])?.[1] ?? ""}
 				onChange={(e) =>
@@ -64,12 +65,12 @@ function FeedbackTableFilter({
 					])
 				}
 				placeholder="Max"
-				className="w-24 border shadow rounded"
+				className="w-24"
 			/>
 		</div>
 	) : (
-		<input
-			className="w-36 border shadow rounded p-1 text-slate-800 font-thin"
+		<Input
+			className="w-36"
 			onChange={(e) => column.setFilterValue(e.target.value)}
 			onClick={(e) => e.stopPropagation()}
 			placeholder="Search..."

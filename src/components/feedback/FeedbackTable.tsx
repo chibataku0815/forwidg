@@ -1,10 +1,26 @@
 "use client";
 import React from "react";
 import Ratings from "../ratings";
-import type { ColumnDef } from "@tanstack/react-table";
+import {
+	flexRender,
+	getCoreRowModel,
+	getFilteredRowModel,
+	getPaginationRowModel,
+	getSortedRowModel,
+	useReactTable,
+	type ColumnDef,
+} from "@tanstack/react-table";
 import type { InferSelectModel } from "drizzle-orm";
 import type { feedbacks } from "@/db/schema";
-import FeedbackTablePagination from "./FeedbackTablePagination";
+import {
+	Table,
+	TableHeader,
+	TableRow,
+	TableHead,
+	TableCell,
+	TableBody,
+} from "../ui/table";
+import FeedbackTableFilter from "./FeedbackTableFilter";
 
 /**
  * InferSelectModelについて:
@@ -18,13 +34,26 @@ import FeedbackTablePagination from "./FeedbackTablePagination";
 type Feedback = InferSelectModel<typeof feedbacks>;
 
 /**
- * フィードバックテーブルコンポーネント
+ * フィード��ックテーブルコンポーネント
  * @param {Object} props - プロパティ
  * @param {Feedback[]} props.data - フィードバックデータの配列
  * @returns {JSX.Element} テーブルのJSX要素
  */
 function FeedbackTable({ data }: { data: Feedback[] }): JSX.Element {
-	// テーブルの列定義
+	/**
+	 * テーブルの列定義
+	 * Explanation of Column Definitions
+	 * - accessorKey: データのアクセサキー
+	 * - header: ヘッダーのテキスト
+	 * - cell: セルのテキスト
+	 * - footer: フッターのテキスト
+	 * - id: 一意の識別子
+	 * - accessorFn: データのアクセサ関数
+	 * - columnDef: カラムの定義
+	 * - getCoreRowModel: コア行モデルの取得
+	 * - getSortedRowModel: ソートされた行モデルの取得
+	 * - getFilteredRowModel: フィルタリングされた行モデルの取得
+	 */
 	const columns = React.useMemo<ColumnDef<Feedback>[]>(
 		() => [
 			{
@@ -69,10 +98,72 @@ function FeedbackTable({ data }: { data: Feedback[] }): JSX.Element {
 		[],
 	);
 
+	const table = useReactTable({
+		columns,
+		data,
+		debugTable: true,
+		getCoreRowModel: getCoreRowModel(),
+		getSortedRowModel: getSortedRowModel(),
+		getFilteredRowModel: getFilteredRowModel(),
+		getPaginationRowModel: getPaginationRowModel(),
+		state: {
+			pagination: {
+				pageIndex: 0,
+				pageSize: 10,
+			},
+		},
+	});
+
 	return (
 		<>
-			<FeedbackTablePagination data={data} columns={columns} />
-			<hr />
+			<Table>
+				<TableHeader>
+					{table.getHeaderGroups().map((headerGroup) => (
+						<TableRow key={headerGroup.id}>
+							{headerGroup.headers.map((header) => (
+								<TableHead key={header.id} colSpan={header.colSpan}>
+									<div
+										{...{
+											className: header.column.getCanSort()
+												? "cursor-pointer select-none"
+												: "",
+											onClick: header.column.getToggleSortingHandler(),
+										}}
+									>
+										{flexRender(
+											header.column.columnDef.header,
+											header.getContext(),
+										)}
+										{{
+											asc: " 🔼",
+											desc: " 🔽",
+										}[header.column.getIsSorted() as string] ?? null}
+										{header.column.getCanFilter() ? (
+											<div className="mt-2">
+												<FeedbackTableFilter
+													column={header.column}
+													table={table}
+												/>
+											</div>
+										) : null}
+									</div>
+								</TableHead>
+							))}
+						</TableRow>
+					))}
+				</TableHeader>
+				<TableBody>
+					{table.getRowModel().rows.map((row) => (
+						<TableRow key={row.id}>
+							{row.getVisibleCells().map((cell) => (
+								<TableCell key={cell.id}>
+									{flexRender(cell.column.columnDef.cell, cell.getContext())}
+								</TableCell>
+							))}
+						</TableRow>
+					))}
+				</TableBody>
+			</Table>
 		</>
 	);
 }

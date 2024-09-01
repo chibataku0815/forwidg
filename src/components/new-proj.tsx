@@ -18,8 +18,8 @@ const NewProjBtn = () => {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button className="rounded-full">
-					<Plus className="w-4 h-4" />
+				<Button variant="ghost" className="p-2">
+					<Plus className="w-6 h-6" />
 				</Button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px] rounded-md">

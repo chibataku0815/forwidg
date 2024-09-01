@@ -18,6 +18,14 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Lock } from "lucide-react";
 
+/**
+ * InferSelectModelについて:
+ * InferSelectModelは、データベースのテーブルから選択されたデータの型を自動的に推測するためのものです。
+ *
+ * @example
+ * // projectsテーブルからデータを取得し、その型をInferSelectModelで推測する
+ * type Project = InferSelectModel<typeof projects>;
+ */
 type Project = InferSelectModel<typeof projects>;
 
 type Props = {

@@ -62,6 +62,18 @@ export const projects = pgTable("projects", {
 
 /**
  * プロジェクトとフィードバックのリレーション定義
+ * @property {Array} feedbacks - プロジェクトに関連するフィードバックのリスト
+ *
+ * プロジェクトとフィードバックのリレーションは、プロジェクトが複数のフィードバックを持つことを意味します。
+ * 例えば、あるプロジェクトに対して複数のユーザーがフィードバックを残すことができます。
+ *
+ * @example
+ * // プロジェクトに関連するフィードバックを取得する
+ * const projectWithFeedbacks = await db.projects.findMany({
+ *   include: {
+ *     feedbacks: true,
+ *   },
+ * });
  */
 export const projectsRelations = relations(projects, ({ many }) => ({
   feedbacks: many(feedbacks),
@@ -87,6 +99,20 @@ export const feedbacks = pgTable("feedbacks", {
 
 /**
  * フィードバックとプロジェクトのリレーション定義
+ * @property {Object} project - フィードバックに関連するプロジェクト
+ * @property {Array} fields - フィードバックテーブルのフィールド
+ * @property {Array} references - プロジェクトテーブルの参照フィールド
+ *
+ * フィードバックとプロジェクトのリレーションは、フィードバックが特定のプロジェクトに関連付けられていることを意味します。
+ * 例えば、あるフィードバックがどのプロジェクトに対するものかを示します。
+ *
+ * @example
+ * // フィードバックに関連するプロジェクトを取得する
+ * const feedbackWithProject = await db.feedbacks.findMany({
+ *   include: {
+ *     project: true,
+ *   },
+ * });
  */
 export const feedbacksRelations = relations(feedbacks, ({ one }) => ({
   project: one(projects, {
@@ -116,4 +142,5 @@ export type SelectProject = typeof projects.$inferSelect;
 
 export type InsertPost = typeof postsTable.$inferInsert;
 export type SelectPost = typeof postsTable.$inferSelect;
+
 

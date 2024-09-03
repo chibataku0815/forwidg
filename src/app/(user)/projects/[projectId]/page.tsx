@@ -8,7 +8,9 @@ import type {
 import Link from "next/link";
 import { Globe, ChevronLeft, Code } from "lucide-react";
 import type { InferSelectModel } from "drizzle-orm";
-import FeedbackTable from "@/components/feedback/FeedbackTable";
+import FeedbackTable from "@/components/feedback/feedback-table";
+import FeedbackTableSkeleton from "@/components/feedback/feedback-table-skeleton";
+import { Suspense } from "react";
 
 /**
  * プロジェクト詳細ページコンポーネント
@@ -25,9 +27,11 @@ const ProjectPage = async ({ params }: { params: { projectId: string } }) => {
 		return <div>Invalid Project ID</div>;
 	}
 
-	// プロジェクトIDを整数に変換する必要がある理由:
-	// URLパラメータは文字列として渡されるため、データベースクエリで使用する前に整数に変換する必要があります。
-	// これにより、データベースが正しい型の値を受け取り、クエリが正しく実行されます。
+	/**
+	 * プロジェクトIDを整数に変換する必要がある理由:
+	 * URLパラメータは文字列として渡されるため、データベースクエリで使用する前に整数に変換する必要があります。
+	 * これにより、データベースが正しい型の値を受け取り、クエリが正しく実行されます。
+	 */
 	const projectsData = await db.query.projects.findMany({
 		where: eq(projects.id, Number(params.projectId)),
 		with: {
@@ -67,9 +71,9 @@ const ProjectPage = async ({ params }: { params: { projectId: string } }) => {
 					<span className="text-lg">Back to projects</span>
 				</Link>
 			</div>
-			<div>
+			<Suspense fallback={<FeedbackTableSkeleton />}>
 				<FeedbackTable data={project.feedbacks} />
-			</div>
+			</Suspense>
 		</div>
 	);
 };

@@ -4,6 +4,8 @@ import { projects } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { auth } from "@clerk/nextjs/server";
 import ProjectsList from "./projects-list";
+import PageListSkeleton from "./page-list-skeleton";
+import { Suspense } from "react";
 
 export default async function Page() {
 	const { userId } = auth();
@@ -24,7 +26,9 @@ export default async function Page() {
 				<h1 className="text-3xl font-bold text-center my-4">Add New Project</h1>
 				<NewProjBtn />
 			</div>
-			<ProjectsList projects={userProjects} subscribed={false} />
+			<Suspense fallback={<PageListSkeleton />}>
+				<ProjectsList projects={userProjects} subscribed={false} />
+			</Suspense>
 		</div>
 	);
 }

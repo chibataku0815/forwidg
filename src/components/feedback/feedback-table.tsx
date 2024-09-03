@@ -20,10 +20,10 @@ import {
 	TableCell,
 	TableBody,
 } from "../ui/table";
-import FeedbackTableFilter from "./FeedbackTableFilter";
-import FeedbackTablePagination from "./FeedbackTablePagination";
+import FeedbackTableFilter from "./feedback-table-filter";
+import FeedbackTablePagination from "./feedback-table-pagination";
 import Ratings from "../ratings";
-import FeedbackTableSkeleton from "./FeedbackTableSkeleton";
+import FeedbackTableSkeleton from "./feedback-table-skeleton";
 
 /**
  * InferSelectModelについて:

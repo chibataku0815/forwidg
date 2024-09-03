@@ -4,8 +4,11 @@ import React from "react";
 import {
 	Pagination,
 	PaginationContent,
+	PaginationEllipsis,
 	PaginationItem,
 	PaginationLink,
+	PaginationNext,
+	PaginationPrevious,
 } from "@/components/ui/pagination";
 import type { Table as TanstackTable } from "@tanstack/react-table";
 import type { InferSelectModel } from "drizzle-orm";
@@ -36,13 +39,11 @@ function FeedbackTablePagination({
 		<Pagination>
 			<PaginationContent>
 				<PaginationItem>
-					<PaginationLink
+					<PaginationPrevious
 						href="#"
 						onClick={() => table.previousPage()}
 						className={!table.getCanPreviousPage() ? "disabled" : ""}
-					>
-						<span>Previous</span>
-					</PaginationLink>
+					/>
 				</PaginationItem>
 				{Array.from({ length: table.getPageCount() }, (_, index) => {
 					const pageIndex = index;
@@ -59,13 +60,11 @@ function FeedbackTablePagination({
 					);
 				})}
 				<PaginationItem>
-					<PaginationLink
+					<PaginationNext
 						href="#"
 						onClick={() => table.nextPage()}
 						className={!table.getCanNextPage() ? "disabled" : ""}
-					>
-						<span>Next</span>
-					</PaginationLink>
+					/>
 				</PaginationItem>
 			</PaginationContent>
 		</Pagination>

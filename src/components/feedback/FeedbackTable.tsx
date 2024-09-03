@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import {
 	flexRender,
 	getCoreRowModel,
@@ -23,6 +23,7 @@ import {
 import FeedbackTableFilter from "./FeedbackTableFilter";
 import FeedbackTablePagination from "./FeedbackTablePagination";
 import Ratings from "../ratings";
+import FeedbackTableSkeleton from "./FeedbackTableSkeleton";
 
 /**
  * InferSelectModelについて:
@@ -40,7 +41,17 @@ type Feedback = InferSelectModel<typeof feedbacks>;
  * @param {Object} props - プロパティ
  * @param {Feedback[]} props.data - フィードバックデータの配列
  */
-function FeedbackTable({ data }: { data: Feedback[] }): JSX.Element {
+function FeedbackTable({
+	data,
+}: {
+	data: Feedback[];
+}): JSX.Element {
+	const [isLoading, setIsLoading] = useState<boolean>(true);
+
+	useEffect(() => {
+		setIsLoading(false);
+	}, []);
+
 	/**
 	 * テーブルの列定義
 	 * Explanation of Column Definitions
@@ -115,8 +126,12 @@ function FeedbackTable({ data }: { data: Feedback[] }): JSX.Element {
 		},
 	});
 
+	if (isLoading) {
+		return <FeedbackTableSkeleton />;
+	}
+
 	return (
-		<>
+		<div className="flex flex-col gap-4">
 			<div className="flex justify-end items-center gap-2 mb-4">
 				<FeedbackTableFilter table={table} />
 			</div>
@@ -139,8 +154,8 @@ function FeedbackTable({ data }: { data: Feedback[] }): JSX.Element {
 											header.getContext(),
 										)}
 										{{
-											asc: " 🔼",
-											desc: " 🔽",
+											asc: "asc",
+											desc: "desc",
 										}[header.column.getIsSorted() as string] ?? null}
 									</div>
 								</TableHead>
@@ -160,8 +175,8 @@ function FeedbackTable({ data }: { data: Feedback[] }): JSX.Element {
 					))}
 				</TableBody>
 			</Table>
-			<FeedbackTablePagination table={table} />
-		</>
+			{table.getPageCount() > 1 && <FeedbackTablePagination table={table} />}
+		</div>
 	);
 }
 

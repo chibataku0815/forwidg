@@ -1,8 +1,13 @@
 import { db } from "@/db";
 import { eq } from "drizzle-orm";
-import { projects as dbProjects } from "@/db/schema";
+import { projects } from "@/db/schema";
+import type {
+	projects as projectsSchema,
+	feedbacks as feedbacksSchema,
+} from "@/db/schema";
 import Link from "next/link";
 import { Globe, ChevronLeft, Code } from "lucide-react";
+import type { InferSelectModel } from "drizzle-orm";
 import FeedbackTable from "@/components/feedback/FeedbackTable";
 
 /**
@@ -10,26 +15,31 @@ import FeedbackTable from "@/components/feedback/FeedbackTable";
  * @param {Object} params - URLパラメータ
  * @param {string} params.projectId - プロジェクトID
  */
-const page = async ({
-	params,
-}: {
-	params: {
-		projectId: string;
+const ProjectPage = async ({ params }: { params: { projectId: string } }) => {
+	// プロジェクトとフィードバックの型を定義
+	type Project = InferSelectModel<typeof projectsSchema> & {
+		feedbacks: InferSelectModel<typeof feedbacksSchema>[];
 	};
-}) => {
-	if (!params.projectId) return <div>Invalid Project ID</div>;
+
+	if (!params.projectId) {
+		return <div>Invalid Project ID</div>;
+	}
 
 	// プロジェクトIDを整数に変換する必要がある理由:
 	// URLパラメータは文字列として渡されるため、データベースクエリで使用する前に整数に変換する必要があります。
 	// これにより、データベースが正しい型の値を受け取り、クエリが正しく実行されます。
-	const projects = await db.query.projects.findMany({
-		where: eq(dbProjects.id, Number(params.projectId)),
+	const projectsData = await db.query.projects.findMany({
+		where: eq(projects.id, Number(params.projectId)),
 		with: {
 			feedbacks: true,
 		},
 	});
 
-	const project = projects[0];
+	const project = projectsData[0] || null;
+
+	if (!project) {
+		return <div>Invalid Project ID</div>;
+	}
 
 	return (
 		<div>
@@ -58,14 +68,10 @@ const page = async ({
 				</Link>
 			</div>
 			<div>
-				{project.feedbacks.length > 0 ? (
-					<FeedbackTable data={project.feedbacks} />
-				) : (
-					<div>No feedbacks yet</div>
-				)}
+				<FeedbackTable data={project.feedbacks} />
 			</div>
 		</div>
 	);
 };
 
-export default page;
+export default ProjectPage;

@@ -2,7 +2,6 @@
  * @file StarIconコンポーネント
  * @description 星のアイコンを表示するためのSVGコンポーネント
  * @param {React.SVGProps<SVGSVGElement>} props - SVG要素のプロパティ
- * @returns {JSX.Element} 星のアイコンを表すSVG要素
  */
 function StarIcon(props: React.SVGProps<SVGSVGElement>): JSX.Element {
 	return (

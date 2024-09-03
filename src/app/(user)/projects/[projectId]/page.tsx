@@ -9,7 +9,6 @@ import FeedbackTable from "@/components/feedback/FeedbackTable";
  * プロジェクト詳細ページコンポーネント
  * @param {Object} params - URLパラメータ
  * @param {string} params.projectId - プロジェクトID
- * @returns {JSX.Element} プロジェクト詳細ページのJSX要素
  */
 const page = async ({
 	params,

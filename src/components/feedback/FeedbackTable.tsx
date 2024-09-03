@@ -1,6 +1,6 @@
 "use client";
+
 import React from "react";
-import Ratings from "../ratings";
 import {
 	flexRender,
 	getCoreRowModel,
@@ -21,6 +21,8 @@ import {
 	TableBody,
 } from "../ui/table";
 import FeedbackTableFilter from "./FeedbackTableFilter";
+import FeedbackTablePagination from "./FeedbackTablePagination";
+import Ratings from "../ratings";
 
 /**
  * InferSelectModelについて:
@@ -34,10 +36,9 @@ import FeedbackTableFilter from "./FeedbackTableFilter";
 type Feedback = InferSelectModel<typeof feedbacks>;
 
 /**
- * フィード��ックテーブルコンポーネント
+ * フィードバックテーブルコンポーネント
  * @param {Object} props - プロパティ
  * @param {Feedback[]} props.data - フィードバックデータの配列
- * @returns {JSX.Element} テーブルのJSX要素
  */
 function FeedbackTable({ data }: { data: Feedback[] }): JSX.Element {
 	/**
@@ -66,7 +67,7 @@ function FeedbackTable({ data }: { data: Feedback[] }): JSX.Element {
 				accessorFn: (row) => row.userEmail,
 				id: "userEmail",
 				cell: (info) => info.getValue(),
-				header: () => <span>Email</span>,
+				header: "Email",
 				footer: (props) => props.column.id,
 			},
 			{
@@ -78,12 +79,12 @@ function FeedbackTable({ data }: { data: Feedback[] }): JSX.Element {
 					) : (
 						<Ratings rating={info.getValue() as number} count={5} />
 					),
-				header: () => <span>Rating</span>,
+				header: "Rating",
 				footer: (props) => props.column.id,
 			},
 			{
 				accessorKey: "message",
-				header: () => "Message",
+				header: "Message",
 				footer: (props) => props.column.id,
 				size: 400,
 				minSize: 200,
@@ -91,7 +92,7 @@ function FeedbackTable({ data }: { data: Feedback[] }): JSX.Element {
 			},
 			{
 				accessorKey: "createdAt",
-				header: () => "Created At",
+				header: "Created At",
 				footer: (props) => props.column.id,
 			},
 		],
@@ -116,6 +117,9 @@ function FeedbackTable({ data }: { data: Feedback[] }): JSX.Element {
 
 	return (
 		<>
+			<div className="flex justify-end items-center gap-2 mb-4">
+				<FeedbackTableFilter table={table} />
+			</div>
 			<Table>
 				<TableHeader>
 					{table.getHeaderGroups().map((headerGroup) => (
@@ -138,14 +142,6 @@ function FeedbackTable({ data }: { data: Feedback[] }): JSX.Element {
 											asc: " 🔼",
 											desc: " 🔽",
 										}[header.column.getIsSorted() as string] ?? null}
-										{header.column.getCanFilter() ? (
-											<div className="mt-2">
-												<FeedbackTableFilter
-													column={header.column}
-													table={table}
-												/>
-											</div>
-										) : null}
 									</div>
 								</TableHead>
 							))}
@@ -164,6 +160,7 @@ function FeedbackTable({ data }: { data: Feedback[] }): JSX.Element {
 					))}
 				</TableBody>
 			</Table>
+			<FeedbackTablePagination table={table} />
 		</>
 	);
 }

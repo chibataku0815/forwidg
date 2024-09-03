@@ -1,10 +1,16 @@
 "use client";
 import React from "react";
-import type { Column } from "@tanstack/react-table";
+import type { Table as TanstackTable } from "@tanstack/react-table";
 import type { InferSelectModel } from "drizzle-orm";
 import type { feedbacks } from "@/db/schema";
-import type { Table as TanstackTable } from "@tanstack/react-table";
 import { Input } from "@/components/ui/input";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 
 /**
  * InferSelectModelについて:
@@ -20,63 +26,46 @@ type Feedback = InferSelectModel<typeof feedbacks>;
 /**
  * FeedbackTableFilterコンポーネント
  * @param {Object} props - プロパティ
- * @param {Column<Feedback, unknown>} props.column - テーブルの列
  * @param {TanstackTable<Feedback>} props.table - テーブルインスタンス
- * @returns {JSX.Element} フィルターのJSX要素
  */
 function FeedbackTableFilter({
-	column,
 	table,
 }: {
-	column: Column<Feedback, unknown>;
 	table: TanstackTable<Feedback>;
 }): JSX.Element {
-	const firstValue = table
-		.getPreFilteredRowModel()
-		.flatRows[0]?.getValue(column.id);
+	const [selectedColumn, setSelectedColumn] = React.useState(
+		table.getAllColumns()[0].id,
+	);
+	const column = table.getColumn(selectedColumn);
+	const columnFilterValue = column?.getFilterValue() ?? "";
 
-	const columnFilterValue = column.getFilterValue();
-	return typeof firstValue === "number" ? (
-		<div
-			className="flex space-x-2"
-			onClick={(e) => e.stopPropagation()}
-			onKeyUp={(e) => e.stopPropagation()}
-			onKeyDown={(e) => e.stopPropagation()}
-		>
+	return (
+		<div className="flex items-center gap-2">
+			<Select
+				value={selectedColumn}
+				onValueChange={(value) => setSelectedColumn(value)}
+			>
+				<SelectTrigger className="w-36">
+					<SelectValue>
+						{table.getColumn(selectedColumn)?.columnDef.header as string}
+					</SelectValue>
+				</SelectTrigger>
+				<SelectContent>
+					{table.getAllColumns().map((col) => (
+						<SelectItem key={col.id} value={col.id}>
+							{col.columnDef.header as string}
+						</SelectItem>
+					))}
+				</SelectContent>
+			</Select>
 			<Input
-				type="number"
-				value={(columnFilterValue as [number, number])?.[0] ?? ""}
-				onChange={(e) =>
-					column.setFilterValue((old: [number, number]) => [
-						e.target.value,
-						old?.[1],
-					])
-				}
-				placeholder="Min"
-				className="w-24"
-			/>
-			<Input
-				type="number"
-				value={(columnFilterValue as [number, number])?.[1] ?? ""}
-				onChange={(e) =>
-					column.setFilterValue((old: [number, number]) => [
-						old?.[0],
-						e.target.value,
-					])
-				}
-				placeholder="Max"
-				className="w-24"
+				className="w-36"
+				onChange={(e) => column?.setFilterValue(e.target.value)}
+				placeholder="Search..."
+				type="text"
+				value={columnFilterValue as string}
 			/>
 		</div>
-	) : (
-		<Input
-			className="w-36"
-			onChange={(e) => column.setFilterValue(e.target.value)}
-			onClick={(e) => e.stopPropagation()}
-			placeholder="Search..."
-			type="text"
-			value={(columnFilterValue ?? "") as string}
-		/>
 	);
 }
 

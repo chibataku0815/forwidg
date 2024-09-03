@@ -36,7 +36,6 @@ type Props = {
 /**
  * プロジェクトリストコンポーネント
  * @param {Props} props - プロジェクトリストとサブスクリプション状態を含むプロパティ
- * @returns {JSX.Element} プロジェクトリストのJSX要素
  */
 const ProjectsList = (props: Props): JSX.Element => {
 	return (

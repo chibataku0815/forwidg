@@ -40,9 +40,9 @@ type Props = {
 const ProjectsList = (props: Props): JSX.Element => {
 	return (
 		<div>
-			<ul className="grid grid-cols-1 md:grid-cols-3 m-5 p-4 gap-4">
+			<div className="grid grid-cols-1 md:grid-cols-3 m-5 p-4 gap-4">
 				{props.projects.map((project: Project) => (
-					<li key={project.id}>
+					<div key={project.id}>
 						<Card className="max-w-[350px] flex flex-col h-full">
 							<CardHeader className="flex-1">
 								<CardTitle>{project.name}</CardTitle>
@@ -54,7 +54,7 @@ const ProjectsList = (props: Props): JSX.Element => {
 								</Link>
 							</CardFooter>
 						</Card>
-					</li>
+					</div>
 				))}
 				{props.subscribed !== true && (
 					<Card className="max-w-[350px] flex flex-col h-full bg-gray-300">
@@ -72,7 +72,7 @@ const ProjectsList = (props: Props): JSX.Element => {
             </div> */}
 					</Card>
 				)}
-			</ul>
+			</div>
 		</div>
 	);
 };

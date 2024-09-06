@@ -2,9 +2,14 @@
  * @file
  * フィードバックテーブルのローディングスケルトンコンポーネント。
  * このスクリプトは、フィードバックテーブルのローディング中に表示されるプレースホルダーを定義します。
- * 主な仕様として、テーブルのヘッダーと複数の行のスケルトンを表示します。
+ *
+ * @spec
+ * - テーブルのヘッダーとボディのスケルトンを表示します。
+ * - ローディング中の視覚的なフィードバックを提供します。
+ *
+ * @limitations
+ * - データがロードされるまでの一時的な表示にのみ使用されます。
  */
-
 import React from "react";
 import { Skeleton } from "../ui/skeleton";
 import {
@@ -16,10 +21,6 @@ import {
 	TableBody,
 } from "../ui/table";
 
-/**
- * フィードバックテーブルスケルトンコンポーネント
- * @returns {JSX.Element} ローディング中に表示されるスケルトン
- */
 function FeedbackTableSkeleton(): JSX.Element {
 	return (
 		<div className="flex flex-col gap-4">

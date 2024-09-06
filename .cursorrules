@@ -23,6 +23,10 @@ You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, 
   - JavaScript: “JSDoc”
   - Use @file instead of @fileoverview
 - Within the comment, please provide an overview of the script, its main specifications, and any limitations.
+- コメント内では、スクリプトの概要、主な仕様、制限事項を小学生でもわかるように記載してください。
+- 複雑な処理があった場合は、処理の流れがわかるように記載
+  - 重複する説明内容は可能な限り避ける
+  -  @returns {JSX.Element}を記載しない
 
 # Naming Conventions
 - Use lowercase with dashes for directories (e.g., components/auth-wizard).

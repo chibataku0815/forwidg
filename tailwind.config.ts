@@ -21,6 +21,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
+    './widgets/**/*.{ts,tsx}', // ウィジェット用のパスを追加
   ],
   prefix: "",
   theme: {

@@ -19,7 +19,7 @@ import {
 	TableHead,
 	TableCell,
 	TableBody,
-} from "@/components/ui/table";
+} from "@/shared/components/ui/table";
 import FeedbackTableFilter from "./feedback-table-filter";
 import FeedbackTablePagination from "./feedback-table-pagination";
 import Ratings from "@/components/ratings";

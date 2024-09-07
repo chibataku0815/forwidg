@@ -9,7 +9,7 @@ import {
 	PaginationLink,
 	PaginationNext,
 	PaginationPrevious,
-} from "@/components/ui/pagination";
+} from "@/shared/components/ui/pagination";
 import type { Table as TanstackTable } from "@tanstack/react-table";
 import type { InferSelectModel } from "drizzle-orm";
 import type { feedbacks } from "@/db/schema";
@@ -40,6 +40,7 @@ function FeedbackTablePagination({
 			<PaginationContent>
 				<PaginationItem>
 					<PaginationPrevious
+						size="sm"
 						href="#"
 						onClick={() => table.previousPage()}
 						className={!table.getCanPreviousPage() ? "disabled" : ""}
@@ -50,6 +51,7 @@ function FeedbackTablePagination({
 					return (
 						<PaginationItem key={`page-${pageIndex}`}>
 							<PaginationLink
+								size="sm"
 								href="#"
 								isActive={table.getState().pagination.pageIndex === pageIndex}
 								onClick={() => table.setPageIndex(pageIndex)}
@@ -61,6 +63,7 @@ function FeedbackTablePagination({
 				})}
 				<PaginationItem>
 					<PaginationNext
+						size="sm"
 						href="#"
 						onClick={() => table.nextPage()}
 						className={!table.getCanNextPage() ? "disabled" : ""}

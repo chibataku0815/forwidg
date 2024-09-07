@@ -1,6 +1,7 @@
 /**
  * @file Next.js configuration file
  * This file configures Next.js for our SaaS application, including both the dashboard and the embeddable widget.
+ * @path next.config.mjs
  */
 
 /** @type {import('next').NextConfig} */

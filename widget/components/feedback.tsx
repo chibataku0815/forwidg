@@ -2,6 +2,8 @@
  * @file Feedback Widget using Shadow DOM
  * This file implements a feedback widget as a Web Component using Shadow DOM for enhanced encapsulation and security.
  * It uses array methods like map, filter, find, and reduce instead of loops.
+ *
+ * @path widget/components/feedback.tsx
  */
 
 class FeedbackWidget extends HTMLElement {
@@ -28,38 +30,19 @@ class FeedbackWidget extends HTMLElement {
         font-family: Arial, sans-serif;
       }
       .widget {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: white;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 16px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        @apply fixed bottom-5 right-5 bg-white border border-gray-300 rounded-lg p-4 shadow-lg;
       }
-      h2 { margin-top: 0; }
+      h2 { @apply mt-0; }
       textarea {
-        width: 100%;
-        margin-bottom: 8px;
-        padding: 8px;
-      }
-      button {
-        background: #007bff;
-        color: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 4px;
-        cursor: pointer;
+        @apply w-full mb-2 p-2 border border-gray-300 rounded;
       }
       .rating {
-        margin-bottom: 8px;
+        @apply mb-2;
       }
       .star {
-        color: #ccc;
-        cursor: pointer;
-        font-size: 24px;
+        @apply text-gray-400 cursor-pointer text-2xl;
       }
-      .star.active { color: gold; }
+      .star.active { @apply text-yellow-500; }
     `;
 
 		const html = `
@@ -69,7 +52,7 @@ class FeedbackWidget extends HTMLElement {
           ${this.generateStarsHtml()}
         </div>
         <textarea placeholder="Your feedback..."></textarea>
-        <button>Submit</button>
+        <button class="shadcn-button">Submit</button>
       </div>
     `;
 

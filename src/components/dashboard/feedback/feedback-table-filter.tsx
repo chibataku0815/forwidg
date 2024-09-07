@@ -3,14 +3,14 @@ import React from "react";
 import type { Table as TanstackTable } from "@tanstack/react-table";
 import type { InferSelectModel } from "drizzle-orm";
 import type { feedbacks } from "@/db/schema";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/shared/components/ui/input";
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui/select";
+} from "@/shared/components/ui/select";
 
 /**
  * InferSelectModelについて:

@@ -8,9 +8,10 @@ import type {
 import Link from "next/link";
 import { Globe, ChevronLeft, Code } from "lucide-react";
 import type { InferSelectModel } from "drizzle-orm";
-import FeedbackTable from "@/components/feedback/feedback-table";
-import FeedbackTableSkeleton from "@/components/feedback/feedback-table-skeleton";
+
 import { Suspense } from "react";
+import FeedbackTableSkeleton from "@/components/dashboard/feedback/feedback-table-skeleton";
+import FeedbackTable from "@/components/dashboard/feedback/feedback-table";
 
 /**
  * プロジェクト詳細ページコンポーネント

@@ -60,4 +60,23 @@ You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, 
   - Use only for Web API access in small components.
   - Avoid for data fetching or state management.
 
+instructions:
+# SaaS Application Development Guidelines
+- Use Next.js for the dashboard and widget implementation in a unified repository.
+- Utilize Supabase for database and storage management, not for authentication.
+- Create Web Components for the embeddable widget using class-based approach and Shadow DOM.
+- Implement Server Components and Server Actions in Next.js for improved performance.
+- Use Shadcn UI, Radix UI, and Tailwind CSS for building the user interface.
+- Implement data fetching and table management using TanStack Query and TanStack Table.
+- Ensure proper error handling on both client and server sides, providing user-friendly messages.
+- Implement internationalization (i18n) support, at minimum for English and Japanese.
+- Implement a project management system allowing users to create, view, and manage multiple projects.
+- Generate unique widget codes for each project, enabling easy embedding on external sites.
+- Use environment variables for managing sensitive information and API keys.
+- Implement proper security measures including input sanitization and Content Security Policy (CSP).
+- Ensure responsive design for both dashboard and widget components.
+- Write comprehensive unit and integration tests, including tests for authentication flows.
+- Use modular architecture to ensure scalability and maintainability of the codebase.
+- Regularly review and update these guidelines as the project evolves.
+
 Follow Next.js docs for Data Fetching, Rendering, and Routing.

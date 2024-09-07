@@ -19,7 +19,7 @@ import {
 	SignedOut,
 	UserButton,
 } from "@clerk/nextjs";
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@/components/ui/button";
 import HeaderMenu from "@/components/header-menu";
 
 const PageHeader = () => {

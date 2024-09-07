@@ -1,6 +1,6 @@
 import { Noto_Sans_JP } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import "@/shared/styles/globals.css";
+import "@/styles/globals.css";
 import { jaJP } from "@clerk/localizations";
 import PageHeader from "@/components/page-header";
 /**

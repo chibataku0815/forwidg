@@ -9,7 +9,7 @@ import {
 	PaginationLink,
 	PaginationNext,
 	PaginationPrevious,
-} from "@/shared/components/ui/pagination";
+} from "@/components/ui/pagination";
 import type { Table as TanstackTable } from "@tanstack/react-table";
 import type { InferSelectModel } from "drizzle-orm";
 import type { feedbacks } from "@/db/schema";

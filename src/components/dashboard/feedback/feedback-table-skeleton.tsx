@@ -11,7 +11,7 @@
  * - データがロードされるまでの一時的な表示にのみ使用されます。
  */
 import React from "react";
-import { Skeleton } from "../ui/skeleton";
+
 import {
 	Table,
 	TableHeader,
@@ -19,7 +19,8 @@ import {
 	TableHead,
 	TableCell,
 	TableBody,
-} from "../ui/table";
+} from "@/components/ui/table";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function FeedbackTableSkeleton(): JSX.Element {
 	return (

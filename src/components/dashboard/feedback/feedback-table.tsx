@@ -19,10 +19,10 @@ import {
 	TableHead,
 	TableCell,
 	TableBody,
-} from "../ui/table";
+} from "@/components/ui/table";
 import FeedbackTableFilter from "./feedback-table-filter";
 import FeedbackTablePagination from "./feedback-table-pagination";
-import Ratings from "../ratings";
+import Ratings from "@/components/ratings";
 import FeedbackTableSkeleton from "./feedback-table-skeleton";
 
 /**

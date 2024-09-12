@@ -53,24 +53,31 @@ const ProjectPage = async ({ params }: { params: { projectId: string } }) => {
 				<Globe className="h-4 w-4" />
 				<span>{project.description}</span>
 			</div>
-			{project.url && (
-				<Link
-					href={project.url}
-					target="_blank"
-					className="flex items-center justify-center gap-3"
-				>
-					<Code className="h-4 w-4" />
-					<span>{project.url}</span>
-				</Link>
-			)}
-			<div>
-				<Link
-					href="/dashboard"
-					className="flex items-center text-indigo-700 mb-5 w-fit"
-				>
-					<ChevronLeft className="h-5 w-5 mr-1" />
-					<span className="text-lg">Back to projects</span>
-				</Link>
+			<div className="flex justify-between items-start">
+				<div className="proj-info">
+					<h1 className="text-3xl font-bold mb-3">{project.name}</h1>
+					<h2 className="text-primary-background text-xl mb-2">
+						{project.description}
+					</h2>
+				</div>
+				<div className="flex flex-col">
+					{project.url ? (
+						<Link
+							href={project.url}
+							className="underline text-indigo-700 flex items-center"
+						>
+							<Globe className="h-5 w-5 mr-1" />
+							<span className="text-lg">Visit site</span>
+						</Link>
+					) : null}
+					<Link
+						href={`/projects/${params.projectId}/instructions`}
+						className="underline text-indigo-700 flex items-center mt-2"
+					>
+						<Code className="h-5 w-5 mr-1" />
+						<span className="text-lg">Embed Code</span>
+					</Link>
+				</div>
 			</div>
 			<Suspense fallback={<FeedbackTableSkeleton />}>
 				<FeedbackTable data={project.feedbacks} />

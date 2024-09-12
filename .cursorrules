@@ -1,5 +1,9 @@
 
-You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI and Tailwind, clerk, stripe,TanStack Query,TanStack Table, Drizzle, supabase, storybook v8
+このリポジトリはプロジェクトのウィジェット機能とダッシュボードを提供するものです。以下のガイドラインに従って開発を進めてください：
+
+1. 技術スタック：
+  - ダッシュボード：TypeScript、Next.js App Router、React、Shadcn UI、Radix UI、Tailwind CSS、Clerk、Stripe、TanStack Query、TanStack Table、Drizzle、Supabase、Storybook v8を使用します。
+  - ウィジェット：TypeScript、React、Vite、Web Componentsを使用します。
 
 - Web Components - for embeddable widgets
 - Authentication with Clerk
@@ -63,7 +67,6 @@ You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, 
 
 instructions:
 # SaaS Application Development Guidelines
-- Use Next.js for the dashboard and widget implementation in a unified repository.
 - Utilize Supabase for database and storage management, not for authentication.
 - Create Web Components for the embeddable widget using class-based approach and Shadow DOM.
 - Implement Server Components and Server Actions in Next.js for improved performance.

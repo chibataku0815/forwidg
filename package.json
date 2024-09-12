@@ -1,21 +1,23 @@
 {
-  "private": true,
-  "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "type-check": "turbo type-check",
-    "clean": "turbo clean",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
-  },
-  "devDependencies": {
-    "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.5.11",
-    "turbo": "^2.1.1"
-  },
-  "packageManager": "pnpm@8.15.6",
-  "engines": {
-    "node": ">=18"
-  },
-  "name": "with-tailwind"
+	"name": "turborepo-shadcn-ui",
+	"version": "1.4.2",
+	"private": true,
+	"license": "MIT",
+	"scripts": {
+		"build": "turbo build",
+		"dev": "turbo dev",
+		"lint": "biome lint . --max-warnings 0",
+		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
+		"ui": "pnpm --filter @repo/ui ui"
+	},
+	"devDependencies": {
+		"@repo/eslint-config": "workspace:*",
+		"@repo/typescript-config": "workspace:*",
+		"prettier": "^3.3.3",
+		"turbo": "2.1.1"
+	},
+	"packageManager": "pnpm@8.9.0",
+	"engines": {
+		"node": ">=18"
+	}
 }

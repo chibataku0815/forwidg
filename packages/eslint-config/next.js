@@ -2,11 +2,12 @@ const { resolve } = require("node:path");
 
 const project = resolve(process.cwd(), "tsconfig.json");
 
-/** @type {import("biome").Config} */
+/** @type {import("eslint").Linter.Config} */
 module.exports = {
   extends: [
-    "biome:recommended",
-    require.resolve("@vercel/style-guide/biome/next"),
+    "eslint:recommended",
+    "prettier",
+    require.resolve("@vercel/style-guide/eslint/next"),
     "turbo",
   ],
   globals: {
@@ -26,7 +27,7 @@ module.exports = {
     },
   },
   ignorePatterns: [
-    // ドットファイルを無視
+    // Ignore dotfiles
     ".*.js",
     "node_modules/",
   ],

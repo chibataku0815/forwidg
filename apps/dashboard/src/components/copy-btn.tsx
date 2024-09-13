@@ -5,7 +5,7 @@ import {
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "@repo/ui/components/ui/tooltip";
 
 const CopyBtn = ({
 	text,

@@ -19,8 +19,8 @@ import {
 	TableHead,
 	TableCell,
 	TableBody,
-} from "@/components/ui/table";
-import { Skeleton } from "@/components/ui/skeleton";
+} from "@repo/ui/components/ui/table";
+import { Skeleton } from "@repo/ui/components/ui/skeleton";
 
 function FeedbackTableSkeleton(): JSX.Element {
 	return (

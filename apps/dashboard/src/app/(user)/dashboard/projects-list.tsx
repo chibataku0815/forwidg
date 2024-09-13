@@ -13,10 +13,9 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+} from "@repo/ui/components/ui/card";
+import { Button } from "@repo/ui/components/ui/button";
 import Link from "next/link";
-import { Lock } from "lucide-react";
 
 /**
  * InferSelectModelについて:
@@ -60,7 +59,6 @@ const ProjectsList = (props: Props): JSX.Element => {
 					<Card className="max-w-[350px] flex flex-col h-full bg-gray-300">
 						<CardHeader className="flex-1">
 							<CardTitle className="flex flex-row text-sm md:text-lg items-center">
-								<Lock className="h-4 w-4 md:h-8 md:w-8 mr-2" />
 								<span>Upgrade to Premium</span>
 							</CardTitle>
 							<CardDescription className="mt-3">

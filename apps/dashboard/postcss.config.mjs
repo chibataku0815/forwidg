@@ -1,1 +1,3 @@
-export { default } from "@repo/ui/postcss.config";
+import sharedConfig from "@repo/ui/postcss.config";
+
+export default sharedConfig;

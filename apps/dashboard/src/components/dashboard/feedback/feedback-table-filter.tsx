@@ -3,14 +3,14 @@ import React from "react";
 import type { Table as TanstackTable } from "@tanstack/react-table";
 import type { InferSelectModel } from "drizzle-orm";
 import type { feedbacks } from "@/db/schema";
-import { Input } from "@/components/ui/input";
+import { Input } from "@repo/ui/components/ui/input";
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui/select";
+} from "@repo/ui/components/ui/select";
 
 /**
  * InferSelectModelについて:
@@ -34,8 +34,13 @@ function FeedbackTableFilter({
 	table: TanstackTable<Feedback>;
 }): JSX.Element {
 	const [selectedColumn, setSelectedColumn] = React.useState(
-		table.getAllColumns()[0].id,
+		table.getAllColumns()?.[0]?.id ?? "",
 	);
+
+	if (!selectedColumn) {
+		throw new Error("FeedbackTableFilter: No columns available in the table.");
+	}
+
 	const column = table.getColumn(selectedColumn);
 	const columnFilterValue = column?.getFilterValue() ?? "";
 

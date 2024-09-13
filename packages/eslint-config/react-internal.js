@@ -3,12 +3,14 @@ const { resolve } = require("node:path");
 const project = resolve(process.cwd(), "tsconfig.json");
 
 /*
- * これはReactを利用する内部ライブラリ用のカスタムBiome設定です。
+ * This is a custom ESLint configuration for use with
+ * internal (bundled by their consumer) libraries
+ * that utilize React.
  */
 
-/** @type {import("biome").Config} */
+/** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: ["biome:recommended", "turbo"],
+  extends: ["eslint:recommended", "prettier", "turbo"],
   plugins: ["only-warn"],
   globals: {
     React: true,
@@ -25,13 +27,13 @@ module.exports = {
     },
   },
   ignorePatterns: [
-    // ドットファイルを無視
+    // Ignore dotfiles
     ".*.js",
     "node_modules/",
     "dist/",
   ],
   overrides: [
-    // .tsxファイルを強制的に検出
+    // Force ESLint to detect .tsx files
     { files: ["*.js?(x)", "*.ts?(x)"] },
   ],
 };

@@ -6,7 +6,7 @@
  */
 
 import React from "react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@repo/ui/components/ui/skeleton";
 
 /**
  * ページリストスケルトンコンポーネント

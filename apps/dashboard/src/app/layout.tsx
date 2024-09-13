@@ -1,6 +1,6 @@
 import { Noto_Sans_JP } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import "@/styles/globals.css";
+import "./globals.css";
 import { jaJP } from "@clerk/localizations";
 import PageHeader from "@/components/page-header";
 /**
@@ -15,6 +15,8 @@ import PageHeader from "@/components/page-header";
  *
  * @limitations
  * - フォントのサブセットは"latin"のみです。
+ *
+ * @path apps/dashboard/src/app/layout.tsx
  */
 
 const notoSansJP = Noto_Sans_JP({

@@ -2,9 +2,9 @@ const { resolve } = require("node:path");
 
 const project = resolve(process.cwd(), "tsconfig.json");
 
-/** @type {import("biome").Config} */
+/** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: ["biome:recommended", "turbo"],
+  extends: ["eslint:recommended", "prettier", "turbo"],
   plugins: ["only-warn"],
   globals: {
     React: true,
@@ -21,7 +21,7 @@ module.exports = {
     },
   },
   ignorePatterns: [
-    // ドットファイルを無視
+    // Ignore dotfiles
     ".*.js",
     "node_modules/",
     "dist/",

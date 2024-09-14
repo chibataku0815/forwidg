@@ -1,8 +1,5 @@
 import { Noto_Sans_JP } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
-import { jaJP } from "@clerk/localizations";
-import PageHeader from "@/components/page-header";
 /**
  * @fileoverview
  * このファイルは、アプリケーション全体のレイアウトを定義します。
@@ -31,13 +28,8 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<ClerkProvider localization={jaJP}>
-			<html lang="ja">
-				<body className={notoSansJP.className}>
-					<PageHeader />
-					{children}
-				</body>
-			</html>
-		</ClerkProvider>
+		<html lang="ja">
+			<body className={notoSansJP.className}>{children}</body>
+		</html>
 	);
 }

@@ -71,6 +71,13 @@ const ProjectPage = async ({ params }: { params: { projectId: string } }) => {
 					<ChevronLeft className="h-5 w-5 mr-1" />
 					<span className="text-lg">Back to projects</span>
 				</Link>
+				<Link
+					href={`/projects/${params.projectId}/instructions`}
+					className="underline text-indigo-700 flex items-center mt-2"
+				>
+					<Code className="h-5 w-5 mr-1" />
+					<span className="text-lg">Embed Code</span>
+				</Link>
 			</div>
 			<Suspense fallback={<FeedbackTableSkeleton />}>
 				<FeedbackTable data={project.feedbacks} />

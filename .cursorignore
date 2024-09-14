@@ -19,4 +19,10 @@ node_modules/
 .turbo
 
 apps/*/node_modules
+apps/*/dist
+apps/*/build
+apps/*/.next
+apps/*/.vercel
+apps/*/.turbo
 packages/*/node_modules
+packages/*/dist

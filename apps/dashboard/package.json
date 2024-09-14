@@ -13,6 +13,7 @@
 		"@clerk/localizations": "^2.7.1",
 		"@clerk/nextjs": "^5.3.6",
 		"@repo/ui": "workspace:*",
+		"@stripe/stripe-js": "^4.4.0",
 		"@supabase/supabase-js": "^2.45.3",
 		"@tanstack/react-table": "^8.20.5",
 		"clsx": "^2.1.1",
@@ -22,6 +23,7 @@
 		"postgres": "^3.4.4",
 		"react": "^18",
 		"react-dom": "^18",
+		"stripe": "^16.11.0",
 		"tailwind-merge": "^2.4.0"
 	},
 	"devDependencies": {

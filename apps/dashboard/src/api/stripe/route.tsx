@@ -16,31 +16,33 @@ import { eq } from "drizzle-orm";
  * @returns {Promise<Response>} レスポンスオブジェクト
  */
 export async function POST(req: Request): Promise<Response> {
-  try {
-    const { price, quantity = 1 } = await req.json();
-    const { userId } = auth();
+	try {
+		const { price, quantity = 1 } = await req.json();
+		const { userId } = auth();
 
-    if (!userId) {
-      return createErrorResponse("Unauthorized", 401);
-    }
+		if (!userId) {
+			return createErrorResponse("Unauthorized", 401);
+		}
 
-    const customer = await getOrCreateCustomer(userId);
+		const customer = await getOrCreateCustomer(userId);
 
-    if (!customer?.id) {
-      return createErrorResponse("Failed to get a customer id", 500);
-    }
+		if (!customer?.id) {
+			return createErrorResponse("Failed to get a customer id", 500);
+		}
 
-    const session = await createCheckoutSession(customer.id, price, quantity);
+		const session = await createCheckoutSession(customer.id, price, quantity);
 
-    if (!session) {
-      return createErrorResponse("Failed to create a session", 500);
-    }
+		if (!session) {
+			return createErrorResponse("Failed to create a session", 500);
+		}
 
-    return new Response(JSON.stringify({ sessionId: session.id }), { status: 200 });
-  } catch (error) {
-    console.error(error);
-    return createErrorResponse("Failed to create a session", 500);
-  }
+		return new Response(JSON.stringify({ sessionId: session.id }), {
+			status: 200,
+		});
+	} catch (error) {
+		console.error(error);
+		return createErrorResponse("Failed to create a session", 500);
+	}
 }
 
 /**
@@ -48,25 +50,27 @@ export async function POST(req: Request): Promise<Response> {
  * @param {string} userId - ユーザーID
  * @returns {Promise<{ id: string } | null>} 顧客オブジェクト
  */
-async function getOrCreateCustomer(userId: string): Promise<{ id: string } | null> {
-  const userSubscription = await db.query.subscriptions.findFirst({
-    where: eq(subscriptions.userId, userId),
-  });
+async function getOrCreateCustomer(
+	userId: string,
+): Promise<{ id: string } | null> {
+	const userSubscription = await db.query.subscriptions.findFirst({
+		where: eq(subscriptions.userId, userId),
+	});
 
-  if (userSubscription) {
-    return { id: userSubscription.stripeCustomerId };
-  }
+	if (userSubscription && userSubscription.stripeCustomerId) {
+		return { id: userSubscription.stripeCustomerId };
+	}
 
-  const response = await stripe.customers.create({
-    metadata: { dbId: userId },
-  });
+	const response = await stripe.customers.create({
+		metadata: { dbId: userId },
+	});
 
-  await db.insert(subscriptions).values({
-    userId,
-    stripeCustomerId: response.id,
-  });
+	await db.insert(subscriptions).values({
+		userId,
+		stripeCustomerId: response.id,
+	});
 
-  return { id: response.id };
+	return { id: response.id };
 }
 
 /**
@@ -77,19 +81,19 @@ async function getOrCreateCustomer(userId: string): Promise<{ id: string } | nul
  * @returns {Promise<Stripe.Checkout.Session | null>} チェックアウトセッション
  */
 async function createCheckoutSession(
-  customerId: string,
-  price: string,
-  quantity: number
+	customerId: string,
+	price: string,
+	quantity: number,
 ): Promise<Stripe.Checkout.Session | null> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+	const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
-  return stripe.checkout.sessions.create({
-    success_url: `${baseUrl}/payments/checkout-success`,
-    customer: customerId,
-    payment_method_types: ["card"],
-    mode: "subscription",
-    line_items: [{ price, quantity }],
-  });
+	return stripe.checkout.sessions.create({
+		success_url: `${baseUrl}/payments/checkout-success`,
+		customer: customerId,
+		payment_method_types: ["card"],
+		mode: "subscription",
+		line_items: [{ price, quantity }],
+	});
 }
 
 /**
@@ -99,5 +103,5 @@ async function createCheckoutSession(
  * @returns {Response} エラーレスポンス
  */
 function createErrorResponse(message: string, status: number): Response {
-  return new Response(JSON.stringify({ error: message }), { status });
+	return new Response(JSON.stringify({ error: message }), { status });
 }

@@ -9,6 +9,7 @@ import { auth } from "@clerk/nextjs/server";
 import { db } from "@/db";
 import { subscriptions } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import type { Stripe } from "stripe";
 
 /**
  * POSTリクエストを処理する関数
@@ -57,7 +58,7 @@ async function getOrCreateCustomer(
 		where: eq(subscriptions.userId, userId),
 	});
 
-	if (userSubscription && userSubscription.stripeCustomerId) {
+	if (userSubscription?.stripeCustomerId) {
 		return { id: userSubscription.stripeCustomerId };
 	}
 

@@ -1,9 +1,11 @@
+# プロジェクトガイドライン
+
 このリポジトリはプロジェクトのウィジェット機能とダッシュボードを提供するmonorepoです。
 以下のガイドラインに従って開発を進めてください：
 
 1. 技術スタック：
-  - ダッシュボード：TypeScript、Next.js App Router, React, Shadcn UI, Radix UI and Tailwind, clerk, stripe,TanStack Query,TanStack Table, Drizzle, supabaseを使用します。
-  - ウィジェット：TypeScript、React、Vite、Web Components,Shadcn UI、Radix UI、Tailwind CSS, Supabaseを使用します。
+  - ダッシュボード：TypeScript、Next.js App Router, React, Shadcn UI, Radix UI and Tailwind, clerk, stripe, TanStack Query, TanStack Table, Drizzle, supabaseを使用します。
+  - ウィジェット：TypeScript、React、Vite、Web Components, Shadcn UI、Radix UI、Tailwind CSS, Supabaseを使用します。
 
 2. コードスタイル：
   - 簡潔で技術的なTypeScriptコードを書き、正確な例を提供します。
@@ -17,7 +19,7 @@
   - コードの先頭にJSDocコメントを追加し、@fileを使用します。
   - スクリプトの概要、主な仕様、制限事項を小学生でも理解できるように記述します。
   - 複雑な処理がある場合は、処理の流れを説明します。重複を避け、@returns {JSX.Element}は記載しません。
-  - @path,@expampleを記載します。
+  - @path, @exampleを記載します。
 
 4. 命名規則：
   - ディレクトリ名は小文字とダッシュを使用します（例：components/auth-wizard）。

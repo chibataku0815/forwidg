@@ -2,7 +2,7 @@ import { auth } from "@clerk/nextjs/server";
 import { subscriptions } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import ManageSubscription from "@/components/payments/manage-subscription";
-import { db } from "../../../db";
+import { db } from "@/db";
 
 const page = async () => {
 	const { userId } = await auth();

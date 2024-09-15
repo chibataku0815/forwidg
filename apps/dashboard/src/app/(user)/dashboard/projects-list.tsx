@@ -16,6 +16,8 @@ import {
 } from "@repo/ui/components/ui/card";
 import { Button } from "@repo/ui/components/ui/button";
 import Link from "next/link";
+import SubscribeBtn from "@/components/payments/subscribe-btn";
+import { monthlyPlanId } from "@/lib/payments";
 
 /**
  * InferSelectModelについて:
@@ -65,9 +67,9 @@ const ProjectsList = (props: Props): JSX.Element => {
 								Unlock unlimited projects
 							</CardDescription>
 						</CardHeader>
-						{/* <div className="w-fit mx-auto mb-4">
-              <SubscribeBtn price={monthlyPlanId} />
-            </div> */}
+						<div className="w-fit mx-auto mb-4">
+							<SubscribeBtn price={monthlyPlanId} />
+						</div>
 					</Card>
 				)}
 			</div>

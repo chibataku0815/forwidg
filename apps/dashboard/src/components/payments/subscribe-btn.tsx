@@ -22,7 +22,6 @@ type Props = {
  * @param {Props} props - サブスクリプションの価格IDを含むプロパティ
  */
 const SubscribeBtn = ({ price }: Props) => {
-	const router = useRouter();
 	const [loading, setLoading] = useState<boolean>(false);
 	const [error, setError] = useState<string | null>(null);
 
@@ -31,6 +30,7 @@ const SubscribeBtn = ({ price }: Props) => {
 	 * @param {string} price - サブスクリプションの価格ID
 	 */
 	const handleCheckout = async (price: string) => {
+		console.log("😄price", price);
 		setLoading(true);
 		try {
 			const { sessionId } = await fetch("/api/stripe/checkout-session", {

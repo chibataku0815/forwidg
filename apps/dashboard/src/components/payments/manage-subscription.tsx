@@ -1,8 +1,10 @@
 /**
- * @file
- * サブスクリプション管理ボタンコンポーネントの定義。
- * このコンポーネントは、ユーザーがサブスクリプションを管理するためのボタンを提供します。
- * Stripeのカスタマーポータルにリダイレクトします。
+ * @file サブスクリプション管理ボタンコンポーネント
+ *
+ * このコンポーネントは、ユーザーがStripeのカスタマーポータルにリダイレクトするためのボタンを提供します。
+ * ボタンクリック時にサーバーサイドAPIを呼び出し、StripeポータルへのリダイレクトURLを取得します。
+ *
+ * @path apps/dashboard/src/components/payments/manage-subscription.tsx
  */
 
 "use client";
@@ -14,6 +16,7 @@ import { Loader2 } from "lucide-react";
 
 /**
  * サブスクリプション管理ボタンコンポーネント
+ * @returns {JSX.Element} サブスクリプション管理ボタン
  */
 const ManageSubscription = () => {
 	const router = useRouter();
@@ -21,11 +24,20 @@ const ManageSubscription = () => {
 	const [error, setError] = useState<string | null>(null);
 
 	/**
-	 * カスタマーポータルにリダイレクトする関数
+	 * Stripeカスタマーポータルへのリダイレクトを処理する関数
+	 *
+	 * 処理の流れ:
+	 * 1. ローディング状態を設定
+	 * 2. サーバーサイドAPIを呼び出し
+	 * 3. レスポンスを解析
+	 * 4. エラーハンドリング
+	 * 5. 成功時にリダイレクト
+	 * 6. ローディング状態を解除
 	 */
 	const redirectToCustomerPortal = async () => {
-		console.log("redirectToCustomerPortal");
 		setLoading(true);
+		setError(null);
+
 		try {
 			const response = await fetch("/api/stripe/create-portal", {
 				method: "POST",
@@ -35,27 +47,26 @@ const ManageSubscription = () => {
 			});
 
 			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
+				throw new Error("Failed to create portal session");
 			}
 
-			const { url } = await response.json();
+			const data = await response.json();
 
-			if (url) {
-				router.push(url);
+			if (data.url) {
+				router.push(data.url);
 			} else {
-				throw new Error("No URL returned from the server");
+				throw new Error("Invalid response from server");
 			}
-		} catch (error) {
-			console.error("Error:", error);
-			setError(
-				"カスタマーポータルへのリダイレクトに失敗しました。もう一度お試しください。",
-			);
+		} catch (err) {
+			console.error("Error redirecting to customer portal:", err);
+			setError("Failed to redirect to customer portal. Please try again.");
+		} finally {
+			setLoading(false);
 		}
-		setLoading(false);
 	};
 
 	if (error) {
-		return <p>{error}</p>;
+		return <p className="text-red-500">{error}</p>;
 	}
 
 	return (

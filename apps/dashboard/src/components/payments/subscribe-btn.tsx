@@ -10,7 +10,6 @@
 import { Button } from "@repo/ui/components/ui/button";
 import { useState } from "react";
 import { getStripe } from "@/lib/stripe-client";
-import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
 type Props = {

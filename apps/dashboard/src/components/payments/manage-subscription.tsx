@@ -24,20 +24,29 @@ const ManageSubscription = () => {
 	 * カスタマーポータルにリダイレクトする関数
 	 */
 	const redirectToCustomerPortal = async () => {
+		console.log("redirectToCustomerPortal");
 		setLoading(true);
 		try {
-			const { url } = await fetch("/api/stripe/create-portal", {
+			const response = await fetch("/api/stripe/create-portal", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-			}).then((res) => res.json());
+			});
 
-			console.log("url", url);
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
 
-			router.push(url.url);
+			const { url } = await response.json();
+
+			if (url) {
+				router.push(url);
+			} else {
+				throw new Error("No URL returned from the server");
+			}
 		} catch (error) {
-			console.error(error);
+			console.error("Error:", error);
 			setError(
 				"カスタマーポータルへのリダイレクトに失敗しました。もう一度お試しください。",
 			);

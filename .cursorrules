@@ -4,8 +4,8 @@
 以下のガイドラインに従って開発を進めてください：
 
 1. 技術スタック：
-  - ダッシュボード：TypeScript、Next.js App Router, React, Shadcn UI, Radix UI and Tailwind, clerk, stripe, TanStack Query, TanStack Table, Drizzle, supabaseを使用します。
-  - ウィジェット：TypeScript、React、Vite、Web Components, Shadcn UI、Radix UI、Tailwind CSS, Supabaseを使用します。
+  - ダッシュボード：TypeScript, Next.js App Router, React, Shadcn UI, Radix UI and Tailwind, clerk, stripe, TanStack Query, TanStack Table, Drizzle, supabaseを使用します。
+  - ウィジェット：TypeScript, Next.js App Router,Web Components, Shadcn UI, Radix UI, Tailwind CSS, Supabaseを使用します。
 
 2. コードスタイル：
   - 簡潔で技術的なTypeScriptコードを書き、正確な例を提供します。
@@ -29,6 +29,7 @@
   - すべてのコードでTypeScriptを使用し、型よりもインターフェースを優先します。
   - enumの代わりにマップを使用します。
   - TypeScriptインターフェースを持つ関数コンポーネントを使用します。
+  - any型を使用しないでください。
 
 6. 構文とフォーマット：
   - 条件文では不要な中括弧を避け、簡潔な構文を使用します。

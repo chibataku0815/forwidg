@@ -1,6 +1,6 @@
 import { SignUpButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
-import { LogIn, Github } from "lucide-react";
+import { LogIn } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@repo/ui/components/ui/button";
 
@@ -24,12 +24,6 @@ const Hero = () => {
 									<Button>
 										<LogIn className="w-4 h-4 mr-2" />
 										Get Started
-									</Button>
-									<Button variant="secondary" asChild>
-										<Link href="https://github.com">
-											<Github className="w-4 h-4 mr-2" />
-											GitHub
-										</Link>
 									</Button>
 								</div>
 							</SignUpButton>

@@ -3,6 +3,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { jaJP } from "@clerk/localizations";
 import PageHeader from "@/components/page-header";
+import Footer from "./landing-page/footer";
 /**
  * @fileoverview
  * このファイルは、アプリケーション全体のレイアウトを定義します。
@@ -36,6 +37,7 @@ export default function RootLayout({
 				<body className={notoSansJP.className}>
 					<PageHeader />
 					{children}
+					<Footer />
 				</body>
 			</html>
 		</ClerkProvider>

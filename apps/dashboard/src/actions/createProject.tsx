@@ -12,11 +12,14 @@ export async function createProject(formData: FormData) {
 		description: formData.get("description") as string,
 		url: formData.get("url") as string,
 		userId,
+		isActive: 1,
 	};
 
 	const [newProject] = await db
 		.insert(projects)
-		.values(project)
+		.values({
+			...project,
+		})
 		.returning({ insertedId: projects.id });
 
 	if (!newProject) {
@@ -25,5 +28,5 @@ export async function createProject(formData: FormData) {
 		);
 	}
 
-	redirect(`/projects/${newProject.insertedId}/instructions`);
+	redirect(`/projects/${newProject.insertedId}`);
 }

@@ -9,7 +9,7 @@ import { eq } from "drizzle-orm";
 import type { feedbacks } from "@/db/schema";
 import { projects } from "@/db/schema";
 import type { InferSelectModel } from "drizzle-orm";
-import { isSubscriptionActive } from "@/lib/subscriptions";
+import { isSubscriptionActive } from "@/services/subscriptions";
 import { ERROR_MESSAGES } from "@/constants/errorMessages";
 
 // プロジェクトの型定義

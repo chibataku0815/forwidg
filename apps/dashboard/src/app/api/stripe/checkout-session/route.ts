@@ -5,7 +5,7 @@
  * @path apps/dashboard/src/api/stripe/route.tsx
  */
 
-import { stripe } from "@/lib/stripe";
+import { stripe } from "@/services/stripe";
 import { auth } from "@clerk/nextjs/server";
 import { db } from "@/db";
 import { subscriptions } from "@/db/schema";

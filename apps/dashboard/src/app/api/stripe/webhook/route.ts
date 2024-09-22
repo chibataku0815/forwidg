@@ -8,7 +8,7 @@
  */
 
 import type Stripe from "stripe";
-import { stripe } from "@/lib/stripe";
+import { stripe } from "@/services/stripe";
 import { createSubscription, cancelSubscription } from "@/actions/userSubscriptions";
 
 // 処理対象のStripeイベント

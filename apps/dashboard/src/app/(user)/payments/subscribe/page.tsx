@@ -1,5 +1,5 @@
 import SubscribeBtn from "@/components/payments/subscribe-btn";
-import { monthlyPlanId, yearlyPlanId } from "@/lib/payments";
+import { monthlyPlanId, yearlyPlanId } from "@/services/payments";
 
 const page = ({
 	searchParams,

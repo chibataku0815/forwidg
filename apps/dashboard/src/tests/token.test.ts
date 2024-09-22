@@ -1,5 +1,5 @@
 import { describe, it } from 'node:test';
-import { generateToken, verifyToken } from './token';
+import { generateToken, verifyToken } from '@/services/token';
 
 /**
  * @file トークン生成と検証のテスト

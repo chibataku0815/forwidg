@@ -20,11 +20,6 @@ export function generateToken(projectId: string): string {
  * @param {string} token - 検証するトークン
  * @returns {boolean} トークンが有効かどうか
  */
-/**
- * トークンの有効性を検証します
- * @param {string} token - 検証するトークン
- * @returns {boolean} トークンが有効かどうか
- */
 export function verifyToken(token: string): boolean {
   const [tokenValue, expiresIn, projectId] = token.split('.');
 

@@ -8,7 +8,7 @@
  * @path apps/dashboard/src/app/api/stripe/create-portal/route.ts
  */
 
-import { stripe } from "@/lib/stripe";
+import { stripe } from "@/services/stripe";
 import { auth } from "@clerk/nextjs/server";
 import { db } from "@/db";
 import { subscriptions } from "@/db/schema";
@@ -80,7 +80,7 @@ export async function POST(req: Request): Promise<Response> {
     const userSubscription = await getUserSubscription(userId);
 
     // Stripe顧客IDを取得または新規作成
-    const customerId = userSubscription?.stripeCustomerId || (await createStripeCustomer(userId)).id;
+    const customerId = userSubscription?.userId || (await createStripeCustomer(userId)).id;
 
     if (!customerId) {
       return new Response(JSON.stringify({ error: "Failed to get or create a customer id" }), { status: 500 });

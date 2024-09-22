@@ -17,7 +17,7 @@ import {
 import { Button } from "@repo/ui/components/ui/button";
 import Link from "next/link";
 import SubscribeBtn from "@/components/payments/subscribe-btn";
-import { monthlyPlanId } from "@/lib/payments";
+import { monthlyPlanId } from "@/services/payments";
 
 /**
  * InferSelectModelについて:

@@ -1,4 +1,5 @@
-import { generateToken } from '@/lib/token';
+
+import { generateToken } from '@/services/token';
 import { auth } from '@clerk/nextjs/server';
 
 /**

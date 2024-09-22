@@ -46,11 +46,6 @@ export const postsTable = pgTable('posts_table', {
 
 /**
  * プロジェクトテーブルの定義
- * @property {number} id - プロジェクトID (主キー)
- * @property {string} name - プロジェクト名
- * @property {string} description - プロジェクトの説明
- * @property {string} url - プロジェクトのURL
- * @property {string} userId - ユーザーID
  */
 export const projects = pgTable("projects", {
   id: serial("id").primaryKey(),
@@ -58,6 +53,8 @@ export const projects = pgTable("projects", {
   description: text("description"),
   url: text("url"),
   userId: varchar("user_id"),
+  isActive: integer("is_active").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
 });
 
 /**
@@ -95,6 +92,8 @@ export const feedbacks = pgTable("feedbacks", {
   userEmail: text("user_email"),
   message: text("message"),
   rating: integer("rating"),
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
 });
 
 /**
@@ -135,6 +134,7 @@ export const subscriptions = pgTable("subscriptions", {
   stripeCustomerId: text("stripe_customer_id"),
   stripeSubscriptionId: text("stripe_subscription_id"),
   subscribed: boolean("subscribed"),
+  createdAt: timestamp("created_at").defaultNow(),
 });
 
 export type InsertProject = typeof projects.$inferInsert;

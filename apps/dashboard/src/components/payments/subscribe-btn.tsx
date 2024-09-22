@@ -9,7 +9,7 @@
 
 import { Button } from "@repo/ui/components/ui/button";
 import { useState } from "react";
-import { getStripe } from "@/lib/stripe-client";
+import { getStripe } from "@/services/stripe-client";
 import { Loader2 } from "lucide-react";
 
 type Props = {

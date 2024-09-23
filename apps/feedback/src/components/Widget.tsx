@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Separator } from "@/components/ui/separator";
+import { Button } from "@repo/ui/components/ui/button";
+import { Label } from "@repo/ui/components/ui/label";
+import { Input } from "@repo/ui/components/ui/input";
+import { Textarea } from "@repo/ui/components/ui/textarea";
+import { Separator } from "@repo/ui/components/ui/separator";
 import { useState } from "react";
 import {
 	Popover,
@@ -66,6 +66,7 @@ export const Widget: React.FC<WidgetProps> = ({ projectId }) => {
 		e.preventDefault();
 		const form = e.target as HTMLFormElement;
 		const formData = new FormData(form);
+
 		// フォームデータのサニタイズ
 		const sanitizedData: FeedbackData = {
 			p_project_id: projectId,
@@ -74,15 +75,22 @@ export const Widget: React.FC<WidgetProps> = ({ projectId }) => {
 			p_message: formData.get("feedback")?.toString().trim() || "",
 			p_rating: rating || 0, // ratingが空の場合は0を設定
 		};
+
+		// デバッグ用のログ出力
+		console.log("Sanitized Data:", sanitizedData);
+
 		const { data: returnedData, error } = await supabase.rpc(
 			"add_feedback",
 			sanitizedData,
 		);
+
 		if (error) {
-			console.error(error);
+			console.error("Error submitting feedback:", error);
+		} else {
+			console.log("Feedback submitted successfully:", returnedData);
 		}
+
 		setSubmitted(true);
-		console.log(returnedData);
 	};
 
 	return (

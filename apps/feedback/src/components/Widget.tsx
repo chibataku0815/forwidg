@@ -34,7 +34,7 @@ interface WidgetProps {
  * @typedef {Object} FeedbackData
  * @property {string} p_project_id - プロジェクトのID
  * @property {string} p_user_name - ユーザーの名前
- * @property {string} p_user_email - ��ーザーのメールアドレス
+ * @property {string} p_user_email - ユーザーのメールアドレス
  * @property {string} p_message - フィードバックメッセージ
  * @property {number} p_rating - 評価の星の数
  */
@@ -72,7 +72,7 @@ export const Widget: React.FC<WidgetProps> = ({ projectId }) => {
 			p_user_name: formData.get("name")?.toString().trim() || "",
 			p_user_email: formData.get("email")?.toString().trim() || "",
 			p_message: formData.get("feedback")?.toString().trim() || "",
-			p_rating: rating,
+			p_rating: rating || 0, // ratingが空の場合は0を設定
 		};
 		const { data: returnedData, error } = await supabase.rpc(
 			"add_feedback",

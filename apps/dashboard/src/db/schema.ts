@@ -53,8 +53,9 @@ export const projects = pgTable("projects", {
   description: text("description"),
   url: text("url"),
   userId: varchar("user_id"),
-  isActive: integer("is_active").notNull(),
+  isActive: integer("is_active").notNull().default(1), // デフォルト値を1に設定
   createdAt: timestamp("created_at").defaultNow(),
+  token: text("token").default(""),
 });
 
 /**
@@ -92,9 +93,10 @@ export const feedbacks = pgTable("feedbacks", {
   userEmail: text("user_email"),
   message: text("message"),
   rating: integer("rating"),
-  content: text("content").notNull(),
+  content: text("content"),
   createdAt: timestamp("created_at").defaultNow(),
 });
+
 
 /**
  * フィードバックとプロジェクトのリレーション定義

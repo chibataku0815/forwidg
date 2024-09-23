@@ -8,7 +8,7 @@
 
 import type { Root } from "react-dom/client";
 import { createRoot } from "react-dom/client";
-import { Widget } from "./widget";
+import { Widget } from "./Widget";
 
 /**
  * @function normalizeAttribute

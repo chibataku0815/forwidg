@@ -8,7 +8,7 @@ import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@repo/ui/components/ui/popover";
 import tailwindStyles from "../index.css?inline";
 import { supabase } from "@/lib/supabaseClient";
 

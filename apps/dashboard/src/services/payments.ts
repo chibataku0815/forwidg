@@ -4,6 +4,6 @@
  * @example const planId = monthlyPlanId;
  */
 
-export const monthlyPlanId: string = "price_1PyviQHY1oe2k0ecXjmhDITp";
-export const yearlyPlanId: string = "price_1PyviQHY1oe2k0ec8EO3Xba5";
+export const monthlyPlanId: string = process.env.NEXT_PUBLIC_STRIPE_MONTHLY_PLAN_ID || '';
+export const yearlyPlanId: string = process.env.NEXT_PUBLIC_STRIPE_YEARLY_PLAN_ID || '';
 export const maxFreeProjects: number = 3;

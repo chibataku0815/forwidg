@@ -83,7 +83,7 @@ async function createPortalSession(customerId: string) {
  * @returns {Promise<Response>} レスポンスオブジェクト
  */
 export async function POST(req: Request): Promise<Response> {
-    /**
+  /**
    * 処理の流れ:
    * 1. ユーザー認証を確認
    * 2. ユーザーのサブスクリプション情報を取得

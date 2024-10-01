@@ -4,6 +4,7 @@ import { Input } from "@repo/ui/components/ui/input";
 import { Textarea } from "@repo/ui/components/ui/textarea";
 import { Separator } from "@repo/ui/components/ui/separator";
 import { useState } from "react";
+import tailwindStyles from "../index.css?inline";
 import {
 	Popover,
 	PopoverContent,
@@ -94,6 +95,7 @@ export const Widget: React.FC<WidgetProps> = ({ projectId }) => {
 
 	return (
 		<>
+			<style>{tailwindStyles}</style>
 			<div className="widget fixed bottom-4 right-4 z-50">
 				<Popover>
 					<PopoverTrigger asChild>
@@ -103,6 +105,7 @@ export const Widget: React.FC<WidgetProps> = ({ projectId }) => {
 						</Button>
 					</PopoverTrigger>
 					<PopoverContent className="widget rounded-lg bg-card p-4 shadow-lg w-full max-w-md">
+						<style>{tailwindStyles}</style>
 						{submitted ? (
 							<div>
 								<h3 className="text-lg font-bold">
